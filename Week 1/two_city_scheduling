@@ -1,0 +1,15 @@
+class Solution {
+public:
+    static bool comparator(vector<int>&a,vector<int>&b)
+    {
+        return a[1]-a[0]>b[1]-b[0]; //sort according to difference between 2 cities prices in descending order
+    }
+    int twoCitySchedCost(vector<vector<int>>& costs) {
+        int n=costs.size();
+        int cost=0;
+        sort(costs.begin(),costs.end(),comparator);
+        for(int i=0;i<n;i++)
+            cost+=i>=n/2?costs[i][1]:costs[i][0];   //Allocating first n/2 people to city A because profit will be higher in sending people to city A than to city B 
+        return cost;                                // Allocating rest n/2 elements to city B
+    }
+};
